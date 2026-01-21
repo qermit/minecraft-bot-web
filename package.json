@@ -1,4 +1,3 @@
-
 {
   "name": "minecraft-bot-panel",
   "version": "1.0.0",
@@ -8,10 +7,12 @@
     "start": "node minecraft-bot-server.js"
   },
   "dependencies": {
+    "canvas": "^3.2.1",
+    "express": "^4.18.2",
+    "minecraft-data": "^3.58.0",
     "mineflayer": "^4.20.1",
     "mineflayer-pathfinder": "^2.4.4",
-    "express": "^4.18.2",
-    "socket.io": "^4.6.1",
-    "minecraft-data": "^3.58.0"
+    "prismarine-viewer": "^1.33.0",
+    "socket.io": "^4.6.1"
   }
 }
