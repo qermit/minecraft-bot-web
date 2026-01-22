@@ -1,5 +1,7 @@
 // minecraft-bot-server.js
-// Instalacja: npm install mineflayer express socket.io pathfinder mineflayer-pathfinder minecraft-data
+// Instalacja: npm install mineflayer express socket.io pathfinder mineflayer-pathfinder minecraft-data dotenv
+
+require('dotenv').config();
 
 const mineflayer = require('mineflayer');
 const express = require('express');
@@ -11,16 +13,28 @@ const { pathfinder, Movements, goals } = require('mineflayer-pathfinder');
 const { GoalNear, GoalBlock, GoalXZ, GoalY, GoalFollow } = goals;
 const { Viewer } = require('prismarine-viewer');
 
-// Konfiguracja
-const CONFIG = {
+// Domyślne wartości konfiguracji
+const DEFAULT_CONFIG = {
   // Minecraft
-  host: '192.168.1.240',           // Adres serwera Minecraft
-  port: 25565,                 // Port serwera
-  username: 'Bot',             // Nazwa bota
-  version: '1.21.1',           // Wersja Minecraft
+  host: '127.0.0.1',           // Adres serwera Minecraft
+  port: 25565,                     // Port serwera
+  username: 'Bot',                 // Nazwa bota
+  version: '1.21.1',               // Wersja Minecraft
   
   // Web server
-  webPort: 4040                // Port panelu webowego
+  webPort: 4040                    // Port panelu webowego
+};
+
+// Konfiguracja ładowana z .env i zmiennych środowiska z fallbackiem na wartości domyślne
+const CONFIG = {
+  // Minecraft
+  host: process.env.BOT_HOST || DEFAULT_CONFIG.host,
+  port: parseInt(process.env.BOT_PORT || DEFAULT_CONFIG.port, 10),
+  username: process.env.BOT_USERNAME || DEFAULT_CONFIG.username,
+  version: process.env.BOT_VERSION || DEFAULT_CONFIG.version,
+  
+  // Web server
+  webPort: parseInt(process.env.WEB_PORT || DEFAULT_CONFIG.webPort, 10)
 };
 
 // Tworzenie bota
