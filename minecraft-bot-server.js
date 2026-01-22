@@ -54,11 +54,20 @@ let currentTask = null;
 function sendStatus() {
   if (!bot.entity) return;
   
+  // Pobierz ekwipunek
+  const inventory = bot.inventory.items().map(item => ({
+    name: item.name,
+    displayName: item.displayName,
+    count: item.count,
+    slot: item.slot
+  }));
+  
   io.emit('status', {
     position: bot.entity.position,
     health: bot.health,
     food: bot.food,
-    activity: currentActivity
+    activity: currentActivity,
+    inventory: inventory
   });
 }
 

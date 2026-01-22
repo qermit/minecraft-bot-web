@@ -242,6 +242,64 @@
                     )}
                   </div>
                 </div>
+
+                {/* Ekwipunek */}
+                <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 mt-6">
+                  <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                    <PackageIcon />
+                    Ekwipunek
+                  </h2>
+                  <div className="grid grid-cols-9 gap-2">
+                    {Array(36).fill(null).map((_, i) => {
+                      const item = botStatus.inventory.find(inv => inv.slot === i);
+                      return (
+                        <div
+                          key={i}
+                          className="aspect-square bg-gray-900 border border-gray-700 rounded flex flex-col items-center justify-center text-xs relative hover:border-gray-500 transition-colors"
+                          title={item ? `${item.displayName} x${item.count}` : 'Puste'}
+                        >
+                          {item && (
+                            <>
+                              <div className="text-lg mb-1">
+                                {item.name.includes('log') && '🪵'}
+                                {item.name.includes('planks') && '🟫'}
+                                {item.name.includes('stick') && '🪵'}
+                                {item.name.includes('pickaxe') && '⛏️'}
+                                {item.name.includes('axe') && '🪓'}
+                                {item.name.includes('sword') && '⚔️'}
+                                {item.name.includes('dirt') && '🟤'}
+                                {item.name.includes('stone') && '⬜'}
+                                {item.name.includes('coal') && '⚫'}
+                                {item.name.includes('iron') && '⚪'}
+                                {item.name.includes('gold') && '🟡'}
+                                {item.name.includes('diamond') && '💎'}
+                                {item.name.includes('torch') && '🔥'}
+                                {item.name.includes('chest') && '📦'}
+                                {!item.name.includes('log') && 
+                                 !item.name.includes('planks') && 
+                                 !item.name.includes('stick') && 
+                                 !item.name.includes('pickaxe') && 
+                                 !item.name.includes('axe') && 
+                                 !item.name.includes('sword') && 
+                                 !item.name.includes('dirt') && 
+                                 !item.name.includes('stone') && 
+                                 !item.name.includes('coal') && 
+                                 !item.name.includes('iron') && 
+                                 !item.name.includes('gold') && 
+                                 !item.name.includes('diamond') && 
+                                 !item.name.includes('torch') && 
+                                 !item.name.includes('chest') && '📦'}
+                              </div>
+                              <div className="absolute bottom-0 right-0 bg-gray-800 text-white text-xs px-1 rounded-tl">
+                                {item.count}
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
 
               {/* Panel komend */}
